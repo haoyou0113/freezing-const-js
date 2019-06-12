@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style>
+        li:hover{
+            color:red;
+            font-size:30px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+    <li>jquery</li>
+    <li>HTML5</li>
+    <li>CSS3</li>
+    <li>ES6</li>
+</ul>
+<script>
+    // var i = 0;
+    // for (i = 0; i < 11;i++){
+    //     var btn = document.createElement('button');
+    //
+    //     (function (i) {
+    //         btn.innerText = i;
+    //         btn.onclick = function () {
+    //             alert(i)
+    //         };
+    //         document.body.appendChild(btn)
+    //     })(i)
+    // }
+    //
+    // var li = document.getElementsByTagName('li')
+    //
+    //
+    // for(let i = 0; i <= li.length;i++ ) {
+    //
+    //     let gen = li[i].innerText;
+    //
+    //     li[i].onmouseover = function () {
+    //         li[i].innerText = li[i].innerText + '我是第' + (i+1) + '个';
+    //
+    //     };
+    //     li[i].onmouseout = function () {
+    //         li[i].innerText = gen;
+    //     }
+    // }
+
+    Object.defineProperty(Object,'freezePolyfill',{                 //在原始对象上添加一个属性 用来确保属性不被修改
+        value:function (obj) {
+            var i;
+            for (i in obj){
+                if(obj.hasOwnProperty(i)){
+                    Object.defineProperty(obj,i,{
+                        writable:false
+                    });
+                }
+                if(obj[i] instanceof Object){
+                    Object.freezePolyfill(obj[i])
+                }
+            }
+            Object.seal(obj);
+
+        }
+    })
+
+    const a = {b:{c:1}}
+    Object.freezePolyfill(a)
+</script>
+</body>
+</html>
